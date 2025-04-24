@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,6 +35,10 @@ import br.senai.sp.jandira.lionschool.R
 @Composable
 
 fun UseCoursesScreen(){
+    var nameState = remember {
+        mutableStateOf("")
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -41,8 +50,7 @@ fun UseCoursesScreen(){
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween
+            horizontalAlignment = Alignment.CenterHorizontally
         ){
             Row (
                 modifier = Modifier
@@ -61,8 +69,7 @@ fun UseCoursesScreen(){
                         contentDescription = "",
 
                         modifier = Modifier
-                            .fillMaxHeight()
-                            .fillMaxWidth()
+                            .fillMaxSize()
                     )
                 }
                 Column (
@@ -79,6 +86,70 @@ fun UseCoursesScreen(){
                 }
             }
             HorizontalDivider()
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(70.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                OutlinedTextField(
+                    value = nameState.value,
+                    onValueChange = {
+                        nameState.value = it
+                    },
+                    modifier = Modifier
+                        .height(48.dp)
+                        .fillMaxWidth(),
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(R.drawable.search),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .width(25.dp)
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.find_course)
+                        )
+                    },
+                    shape = RoundedCornerShape(16.dp),
+
+                )
+            }
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(70.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column (
+                    modifier = Modifier
+                        .width(40.dp)
+                ){
+                    Image(
+                        painter = painterResource(R.drawable.lion_list),
+                        contentDescription = "",
+
+                        modifier = Modifier
+                            .fillMaxSize()
+
+                    )
+                }
+                Column (
+                    modifier = Modifier,
+                ){
+                    Text(
+                        text = stringResource(R.string.courses),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = colorResource(R.color.light_blue)
+                    )
+                }
+            }
         }
     }
 }
