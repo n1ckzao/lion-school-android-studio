@@ -17,6 +17,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.senai.sp.jandira.lionschool.R
+import br.senai.sp.jandira.lionschool.screens.components.SchoolLevels
 
 @Composable
 
@@ -85,7 +88,11 @@ fun UseCoursesScreen(){
                     )
                 }
             }
-            HorizontalDivider()
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(bottom = 16.dp, top = 16.dp),
+                color = colorResource(R.color.light_yellow)
+            )
             Row (
                 modifier = Modifier
                     .fillMaxWidth()
@@ -101,6 +108,7 @@ fun UseCoursesScreen(){
                     modifier = Modifier
                         .height(48.dp)
                         .fillMaxWidth(),
+
                     trailingIcon = {
                         Icon(
                             painter = painterResource(R.drawable.search),
@@ -116,7 +124,9 @@ fun UseCoursesScreen(){
                         )
                     },
                     shape = RoundedCornerShape(16.dp),
-
+                    colors = TextFieldDefaults.colors(
+                       unfocusedIndicatorColor = colorResource(R.color.light_yellow)
+                    )
                 )
             }
             Row (
@@ -149,6 +159,17 @@ fun UseCoursesScreen(){
                         color = colorResource(R.color.light_blue)
                     )
                 }
+
+            }
+            Column (
+                modifier = Modifier
+            ){
+                SchoolLevels(
+                    textTop = "DS",
+                    textTitle = "Desenvolvimento de sistemas",
+                    textDesc = "Descrição",
+                    textDuration = "4 semestres",
+                    logo = painterResource(R.drawable.ic_launcher_foreground)                )
             }
         }
     }
